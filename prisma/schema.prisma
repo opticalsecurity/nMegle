@@ -18,3 +18,13 @@ model Post {
 
     @@index([name])
 }
+
+model Connections {
+    id        Int      @id @default(autoincrement())
+    tags      String[]
+    browserId String
+    connected Boolean  @default(false)
+    connectedTo String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

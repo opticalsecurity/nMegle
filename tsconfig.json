@@ -37,6 +37,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts"
-  ],
+, "public/js/fingerprint.mjs", "src/app/language.tss"  ],
   "exclude": ["node_modules"]
 }

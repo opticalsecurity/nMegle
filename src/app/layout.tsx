@@ -3,6 +3,8 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import Script from "next/script";
+
 import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = {
@@ -23,10 +25,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <Providers>{children}</Providers>
+        <Script id="fingerprintsource" src="https://cdn.jsdelivr.net/npm/@thumbmarkjs/thumbmarkjs/dist/thumbmark.umd.js" />
+        <span id="fingerprint" className="hidden"></span>
+        <Script id="fingerprintloader" src="/js/fingerprint.mjs" />
       </body>
     </html>
   );

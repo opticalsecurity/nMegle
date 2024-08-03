@@ -1,0 +1,43 @@
+# This is the nMegle blueprint for deploying to Render
+services:
+  - type: web # A node web app for the frontend in NextJS
+    plan: free
+    name: nmegle-frontend
+    runtime: node
+    repo: https://github.com/opticalsecurity/nMegle
+    buildCommand: "pnpm install && pnpm build"
+    startCommand: "pnpm start"
+    domains:
+      - "nmegle.ndev.ar"
+    envVars:
+      - key: WORKER_DOMAIN
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nmegle-database
+          property: connectionString
+
+  - type: web # A node web app for the backend in the Indexo's Boilerplate (+ Socket.io)
+    plan: free
+    name: nmegle-backend
+    runtime: node
+    repo: https://github.com/opticalsecurity/nMegle
+    buildCommand: "cd worker && pnpm install && pnpm build"
+    startCommand: "cd worker && pnpm start:prebuilt"
+    domains:
+      - "api-nmegle.ndev.ar"
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CLOUDFLARE_KEY
+        sync: false
+      - key: CLOUDFLARE_ACCOUNT_ID
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nmegle-database
+          property: connectionString
+
+databases:
+  - name: nmegle-database
+    plan: free

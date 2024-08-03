@@ -1,0 +1,9 @@
+{
+  "ext": "ts,js",
+  "ignore": ["*.json", "node_modules"],
+  "watch": ["src"],
+  "execMap": {
+    "ts": "node --require @swc-node/register"
+  },
+  "delay": 10
+}

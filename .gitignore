@@ -44,3 +44,7 @@ yarn-error.log*
 
 # idea files
 .idea
+
+# wrangler
+/worker/dist
+/worker/node_modules
